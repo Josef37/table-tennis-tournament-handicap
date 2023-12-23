@@ -42,3 +42,31 @@ export const newtonsMethod = (f: Func, x = 0, { precision = 0.001 } = {}) => {
 
   return newtonsMethod(f, approx, { precision });
 };
+
+export const bisection = (
+  f: Func,
+  [a, b]: [number, number],
+  { precision = 0.001, maxIter: maxIteration = 1000 } = {}
+) => {
+  if (a >= b) {
+    throw new Error(`Invalid interval [${a}, ${b}]`);
+  }
+  if (Math.sign(f(a)) === Math.sign(f(b))) {
+    throw new Error(`f(a) and f(b) have the same sign.`);
+  }
+
+  let iteration = 1;
+  while (iteration <= maxIteration) {
+    const c = (a + b) / 2;
+    if (f(c) === 0 || (b - a) / 2 < precision) {
+      return c;
+    }
+    iteration += 1;
+    if (Math.sign(f(c)) === Math.sign(f(a))) {
+      a = c;
+    } else {
+      b = c;
+    }
+  }
+  throw new Error("Bisection method exceeded iterations.");
+};

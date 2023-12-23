@@ -21,3 +21,17 @@ tap.test("newtonsMethod", async (t) => {
     precision
   );
 });
+
+tap.test("bisection", async (t) => {
+  const precision = 0.001;
+  isClose(t)(
+    bisection((x) => x ** 2 - 1, [0, 3], { precision }),
+    1,
+    precision
+  );
+  isClose(t)(
+    bisection((x) => x ** 3, [-1, 2], { precision }),
+    0,
+    precision
+  );
+});
