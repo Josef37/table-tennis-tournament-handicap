@@ -20,7 +20,12 @@ export const range = (from: number, to: number, step: number = 1) => {
 /**
  * Two digits after decimal point and adds percent sign, e.g. "12.34%".
  */
-export const formatPercent = (x: number) => (100 * x).toFixed(2) + "%";
+export const formatPercent = (locales: string) => (x: number) =>
+  x.toLocaleString(locales, {
+    style: "percent",
+    maximumFractionDigits: 2,
+    minimumFractionDigits: 2,
+  });
 
 type Func = (x: number) => number;
 
