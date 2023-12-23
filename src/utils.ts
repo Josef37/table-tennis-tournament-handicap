@@ -10,6 +10,14 @@ export const choose = (n: number, k: number) => {
 };
 
 /**
+ * Includes `from` and `to`.
+ */
+export const range = (from: number, to: number, step: number = 1) => {
+  const length = Math.max(0, 1 + Math.floor((to - from) / step));
+  return Array.from(Array(length), (_, i) => from + step * i);
+};
+
+/**
  * Two digits after decimal point and adds percent sign, e.g. "12.34%".
  */
 export const formatPercent = (x: number) => (100 * x).toFixed(2) + "%";
@@ -43,6 +51,10 @@ export const newtonsMethod = (f: Func, x = 0, { precision = 0.001 } = {}) => {
   return newtonsMethod(f, approx, { precision });
 };
 
+/**
+ * Applies the [bisection method](https://en.wikipedia.org/wiki/Bisection_method) to find a root of `f` between `a` and `b`.
+ * `f` has to be continuous and `f(a)` and `f(b)` have to have different signs.
+ */
 export const bisection = (
   f: Func,
   [a, b]: [number, number],
@@ -58,15 +70,19 @@ export const bisection = (
   let iteration = 1;
   while (iteration <= maxIteration) {
     const c = (a + b) / 2;
+
     if (f(c) === 0 || (b - a) / 2 < precision) {
       return c;
     }
-    iteration += 1;
-    if (Math.sign(f(c)) === Math.sign(f(a))) {
+
+    if (Math.sign(f(a)) === Math.sign(f(c))) {
       a = c;
     } else {
       b = c;
     }
+
+    iteration += 1;
   }
+
   throw new Error("Bisection method exceeded iterations.");
 };

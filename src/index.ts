@@ -1,15 +1,14 @@
 import { writeFileSync } from "fs";
-import { range } from "lodash";
 import { resolve } from "path";
-import { formatPercent } from "./utils";
+import { formatPercent, range } from "./utils";
 import {
   gameFromTTR,
   pointFromGame,
   gameFromPointWithAdvantage,
 } from "./probabilities";
 
-const advantages = range(0, 11, 1);
-const deltaTTRs = range(0, 801, 10);
+const advantages = range(0, 10, 1);
+const deltaTTRs = range(0, 800, 10);
 const expectations = deltaTTRs.map((ttr) => gameFromTTR(-ttr));
 const points = expectations.map((_) => pointFromGame(_));
 const withAdvantages = points.map((p) =>
