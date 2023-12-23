@@ -1,0 +1,19 @@
+{
+  "name": "table-tennis-tournament-handicap",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "license": "MIT",
+  "scripts": {
+    "start": "tsx --watch src/index.ts",
+    "test": "tsx --watch src/index.test.ts"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.202",
+    "@types/node": "^20.10.5",
+    "tap": "^18.6.1",
+    "tsx": "^4.7.0"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
+}
