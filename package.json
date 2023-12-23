@@ -4,8 +4,10 @@
   "main": "index.ts",
   "license": "MIT",
   "scripts": {
-    "start": "tsx --watch src/index.ts",
-    "test": "tsx --watch src/index.test.ts"
+    "start": "tsx src/index.ts",
+    "watch": "tsx --watch src/index.ts",
+    "test": "tap",
+    "test:one": "tsx --watch $1"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.202",
