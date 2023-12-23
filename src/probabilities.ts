@@ -50,24 +50,23 @@ export const gameFromPointWithAdvantage = (p: number, s: number) =>
  * Calculates the expected probability of winning a game,
  * when you have `ttrDiff` more TTR points than your opponent.
  */
-export const gameFromTTR = (ttrDiff: number) => {
-  return 1 / (1 + 10 ** (-ttrDiff / 150));
-};
+export const gameFromTTR = (ttrDiff: number) =>
+  1 / (1 + 10 ** (-ttrDiff / 150));
 
 /**
  * Numerically solves the equation `q = gameFromPoint(p)` for `p`.
  * I.e. given the probability `q` of winning a game,
  * what is the corresponding probability `p` of winning a point?
  */
-export const pointFromGame = (q: number) => {
-  return bisection((p) => gameFromPoint(p) - q, [0, 1]);
-};
+export const pointFromGame = (q: number) =>
+  bisection((p) => gameFromPoint(p) - q, [0, 1], { precision: 0.00001 });
 
 /**
  * With `p` being the probability of winning a point,
  * what advantage `s` do we have to give the player,
  * so he wins the game with a probability of `q`?
  */
-export const advantageForChance = (p: number, q: number) => {
-  return bisection((s) => gameFromPointWithAdvantage(p, s) - q, [0, 10]);
-};
+export const advantageForChance = (p: number, q: number) =>
+  bisection((s) => gameFromPointWithAdvantage(p, s) - q, [0, 10], {
+    precision: 0.01,
+  });
