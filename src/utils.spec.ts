@@ -10,28 +10,24 @@ tap.test("choose", async (t) => {
 
 tap.test("newtonsMethod", async (t) => {
   const precision = 0.001;
-  isClose(t)(
+  isClose(t, precision)(
     newtonsMethod((x) => x ** 2, 1, { precision }),
-    0,
-    precision
+    0
   );
-  isClose(t)(
+  isClose(t, precision)(
     newtonsMethod((x) => (x - 1) ** 2, 0, { precision }),
-    1,
-    precision
+    1
   );
 });
 
 tap.test("bisection", async (t) => {
   const precision = 0.001;
-  isClose(t)(
+  isClose(t, precision)(
     bisection((x) => x ** 2 - 1, [0, 3], { precision }),
-    1,
-    precision
+    1
   );
-  isClose(t)(
+  isClose(t, precision)(
     bisection((x) => x ** 3, [-1, 2], { precision }),
-    0,
-    precision
+    0
   );
 });

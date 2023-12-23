@@ -1,4 +1,4 @@
-import { choose, newtonsMethod } from "./utils";
+import { bisection, choose } from "./utils";
 
 /**
  * Calculates the probability of winning a game - i.e. three sets,
@@ -60,16 +60,14 @@ export const gameFromTTR = (ttrDiff: number) => {
  * what is the corresponding probability `p` of winning a point?
  */
 export const pointFromGame = (q: number) => {
-  return newtonsMethod((p) => gameFromPoint(p) - q, 0.5);
+  return bisection((p) => gameFromPoint(p) - q, [0, 1]);
 };
 
 /**
  * With `p` being the probability of winning a point,
  * what advantage `s` do we have to give the player,
  * so he wins the game with a probability of `q`?
- *
- * CAUTION: This method tends to overshoot and fail.
  */
 export const advantageForChance = (p: number, q: number) => {
-  return newtonsMethod((s) => gameFromPointWithAdvantage(p, s) - q, 0);
+  return bisection((s) => gameFromPointWithAdvantage(p, s) - q, [0, 10]);
 };
