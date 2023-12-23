@@ -1,4 +1,4 @@
-import { writeFileSync } from "fs";
+import { mkdirSync, writeFileSync } from "fs";
 import { resolve } from "path";
 import { formatPercent, range } from "./utils";
 import {
@@ -14,6 +14,7 @@ const config = {
   },
   separator: ";",
   language: "de-DE",
+  precision: 0,
   outputPath: resolve(__dirname, "..", "output"),
 };
 
@@ -24,7 +25,7 @@ const pointWinProbabilities = gameWinExpectations.map(pointFromGame);
 const gameWinWithAdvantages = pointWinProbabilities.map((p) =>
   pointAdvantages
     .map((s) => gameFromPointWithAdvantage(p, s))
-    .map(formatPercent(config.language))
+    .map(formatPercent(config.language, config.precision))
 );
 
 const columnHeaders = pointAdvantages;
@@ -35,4 +36,5 @@ const lines = [
   ...gameWinWithAdvantages.map((list, i) => [rowHeaders[i], ...list]),
 ];
 const csv = lines.map((line) => line.join(config.separator)).join("\n");
-writeFileSync(resolve(config.outputPath, "output.csv"), csv, "utf8");
+mkdirSync(config.outputPath, { recursive: true });
+writeFileSync(resolve(config.outputPath, "result.csv"), csv, "utf8");
