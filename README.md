@@ -79,6 +79,8 @@ The following table shows the win probability as a function of ranking and advan
 - Columns: Point advantage for each set..
 - Cells: Probability of winning the game.
 
+You can find [a printable PDF here](./dist/result.pdf), where red cells are closest to 50% and green cells are at most 50%.
+
 |         | **0** | **1** | **2** | **3** | **4** | **5** | **6** | **7** | **8** | **9** | **10** |
 | ------: | ----: | ----: | ----: | ----: | ----: | ----: | ----: | ----: | ----: | ----: | -----: |
 |   **0** |   50% |   66% |   80% |   91% |   96% |   99% |  100% |  100% |  100% |  100% |   100% |
