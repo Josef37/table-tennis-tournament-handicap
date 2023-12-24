@@ -14,6 +14,19 @@ From the difference in ranking points we get an expected win probability for eac
 From that value we can deduce a win probability for each point.
 Now we can try different different point advantages and calculate the win probability for these modified games.
 
+## How to use
+
+There are a few things worth considering:
+
+1. Make it simple for the players! Don't make them calculate the ranking difference and look up an advantage from the results below.
+   Either you tell them the correct advantage with each game or you print a player-to-player matrix where the advantages for each possible match are noted.
+2. Not all ranking points are up to date. Some players might have higher/lower rankings than their skill, because they didn't compete in a while.
+   You could adjust ranking points for these players before calculating advantages.
+3. If you aim for a perfect 50% win probability, you might be out of luck... You can only choose full points advantage.
+   We chose to pick the closest number to 50%, but at most 55% win chance for the worse player.
+4. You might not want to make it totally equal, just a little fairer.
+   You could choose a rule like this: For every 100 ranking points, the better player gets a 2% higher win chance. This way a player with 500 points more will still have a calculated win chance of 60%. This might be better than perfect 50% or unaltered 100%.
+
 ## Program Execution
 
 ```bash
