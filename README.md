@@ -14,7 +14,7 @@ From the difference in ranking points we get an expected win probability for eac
 From that value we can deduce a win probability for each point.
 Now we can try different different point advantages and calculate the win probability for these modified games.
 
-## How to use
+## Program Execution
 
 ```bash
 npm install --global yarn
@@ -25,7 +25,7 @@ yarn start
 
 There are some configuration options in `src/index.ts::config`.
 
-## Calculations
+## Mathematics
 
 There are a few underlying assumptions:
 

@@ -1,3 +1,5 @@
+import { outputConfig } from "./config";
+
 /**
  * Binomial coefficient or "n choose k".
  */
@@ -30,6 +32,23 @@ export const formatPercent =
         minimumFractionDigits: precision,
       })
       .replace(/\s/, "");
+
+export const buildCsv = ({
+  columnHeaders,
+  rowHeaders,
+  data,
+}: {
+  columnHeaders: { toString: () => string }[];
+  rowHeaders: { toString: () => string }[];
+  data: { toString: () => string }[][];
+}) => {
+  return [
+    ["", ...columnHeaders],
+    ...data.map((row, i) => [rowHeaders[i], ...row]),
+  ]
+    .map((row) => row.join(outputConfig.separator))
+    .join("\n");
+};
 
 type Func = (x: number) => number;
 
