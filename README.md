@@ -33,7 +33,7 @@ There are a few things worth considering:
 npm install --global yarn
 yarn install
 yarn start
-# Look for ./output/result.csv
+# Look for files in ./output/
 ```
 
 There are some configuration options in `src/index.ts::config`.

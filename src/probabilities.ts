@@ -91,10 +91,20 @@ export class Calculations {
       [0, this.points - 1],
       { precision: 0.01 }
     );
-
-  /**
-   * Calculates the expected probability of winning a game,
-   * when you have `ttrDiff` more TTR points than your opponent.
-   */
-  gameFromTTR = (ttrDiff: number) => 1 / (1 + 10 ** (-ttrDiff / 150));
 }
+
+/**
+ * Calculates the expected probability of winning a game,
+ * when you have `ttrDiff` more TTR points than your opponent.
+ */
+export const gameFromTTR = (ttrDiff: number) =>
+  1 / (1 + 10 ** (-ttrDiff / 150));
+
+const defaultCalc = new Calculations({ points: 11, sets: 3 });
+
+/**
+ * Calculates the expected probability of winning a single point,
+ * when you have `ttrDiff` more TTR points than your opponent.
+ */
+export const pointFromTTR = (ttrDiff: number) =>
+  defaultCalc.pointFromGame(gameFromTTR(ttrDiff));

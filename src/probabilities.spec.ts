@@ -1,5 +1,5 @@
 import tap, { Test } from "tap";
-import { Calculations } from "./probabilities";
+import { Calculations, gameFromTTR } from "./probabilities";
 import { EPSILON, isClose, larger } from "./testUtils";
 
 const checkBounds = (t: Test) => async (f: (p: number) => number) => {
@@ -74,13 +74,6 @@ tap.test("3 sets, 11 points", async (suite) => {
     isClose(t, 0.1)(c.advantageForChance(0.4, 0.25), 2.4);
     isClose(t, 0.1)(c.advantageForChance(0.1, 0.25), 9.2);
   });
-
-  suite.test("gameFromTTR", async (t) => {
-    t.equal(c.gameFromTTR(0), 0.5);
-    t.equal(c.gameFromTTR(-150), 1 / 11);
-    t.equal(c.gameFromTTR(-300), 1 / 101);
-    t.equal(c.gameFromTTR(300), 100 / 101);
-  });
 });
 
 tap.test("2 sets, 7 points", async (suite) => {
@@ -136,11 +129,11 @@ tap.test("2 sets, 7 points", async (suite) => {
     isClose(t, 0.1)(c.advantageForChance(0.4, 0.25), 1.1);
     isClose(t, 0.1)(c.advantageForChance(0.1, 0.25), 5.6);
   });
+});
 
-  suite.test("gameFromTTR", async (t) => {
-    t.equal(c.gameFromTTR(0), 0.5);
-    t.equal(c.gameFromTTR(-150), 1 / 11);
-    t.equal(c.gameFromTTR(-300), 1 / 101);
-    t.equal(c.gameFromTTR(300), 100 / 101);
-  });
+tap.test("gameFromTTR", async (t) => {
+  t.equal(gameFromTTR(0), 0.5);
+  t.equal(gameFromTTR(-150), 1 / 11);
+  t.equal(gameFromTTR(-300), 1 / 101);
+  t.equal(gameFromTTR(300), 100 / 101);
 });
