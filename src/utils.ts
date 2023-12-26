@@ -95,6 +95,9 @@ export const bisection = (
     throw new Error(`f(a) and f(b) have the same sign.`);
   }
 
+  if (f(a) === 0) return a;
+  if (f(b) === 0) return b;
+
   let iteration = 1;
   while (iteration <= maxIteration) {
     const c = (a + b) / 2;
