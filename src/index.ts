@@ -1,10 +1,9 @@
-import { mkdirSync, writeFileSync } from "fs";
-import { resolve } from "path";
-import { buildCsv, formatPercent, range } from "./utils";
+import { writeCsv, formatPercent } from "./csv";
+import { range } from "./utils";
 import { Calculations, GameConfig } from "./probabilities";
 import { outputConfig } from "./config";
 
-const buildTTRDiffLookup = (
+const writeTTRDiffLookup = (
   gameConfig: GameConfig = { points: 11, sets: 3 },
   deltaTTRs = range(0, 800, 10)
 ) => {
@@ -18,14 +17,11 @@ const buildTTRDiffLookup = (
       .map(formatPercent(outputConfig.language, outputConfig.precision))
   );
 
-  return buildCsv({
+  return writeCsv("result.csv", {
     columnHeaders: pointAdvantages,
     rowHeaders: deltaTTRs,
     data: gameWinWithAdvantages,
   });
 };
 
-const ttrDiffCsv = buildTTRDiffLookup();
-
-mkdirSync(outputConfig.path, { recursive: true });
-writeFileSync(resolve(outputConfig.path, "result.csv"), ttrDiffCsv, "utf8");
+writeTTRDiffLookup();

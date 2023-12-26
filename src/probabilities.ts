@@ -1,4 +1,4 @@
-import { bisection, choose } from "./utils";
+import { bisection, choose } from "./maths";
 
 export interface GameConfig {
   sets: number;
